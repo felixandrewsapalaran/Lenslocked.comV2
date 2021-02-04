@@ -1,4 +1,4 @@
-package view
+package views
 
 /*This file will handle our view logic*/
 

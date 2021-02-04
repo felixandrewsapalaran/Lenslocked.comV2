@@ -1,43 +1,21 @@
 package main
 
 import (
-	"html/template"
 	"net/http"
 
+	"Lenslocked.com/views"
 	"github.com/gorilla/mux"
 )
 
 var (
-	homeTemplate    *template.Template
-	contactTemplate *template.Template
+	// Change their type to View
+	homeView    *views.View
+	contactView *views.View
 )
-
-func main() {
-	var err error
-	homeTemplate, err = template.ParseFiles(
-		"views/home.gohtml",
-		"views/layouts/footer.gohtml",
-	)
-	if err != nil {
-		panic(err)
-	}
-	contactTemplate, err = template.ParseFiles(
-		"views/contact.gohtml",
-		"views/layouts/footer.gohtml",
-	)
-	if err != nil {
-		panic(err)
-	}
-
-	r := mux.NewRouter()
-	r.HandleFunc("/", home)
-	r.HandleFunc("/contact", contact)
-	http.ListenAndServe(":3000", r)
-}
 
 func home(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	err := homeTemplate.Execute(w, nil)
+	err := homeView.Template.Execute(w, nil)
 	if err != nil {
 		panic(err)
 	}
@@ -45,8 +23,20 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 func contact(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	err := contactTemplate.Execute(w, nil)
+	err := contactView.Template.Execute(w, nil)
 	if err != nil {
 		panic(err)
 	}
+}
+
+func main() {
+	// This is the file specific to homeView
+	homeView = views.NewView("views/home.gohtml")
+	// Same applies here for contactView pass the path
+	contactView = views.NewView("views/contact.gohtml")
+
+	r := mux.NewRouter()
+	r.HandleFunc("/", home)
+	r.HandleFunc("/contact", contact)
+	http.ListenAndServe(":3000", r)
 }
