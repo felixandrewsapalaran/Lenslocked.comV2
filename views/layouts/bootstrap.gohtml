@@ -8,10 +8,10 @@
   </head>
 
   <body>
+    // Add navbar template
+    {{template "navbar"}}
 
     <div class="container-fluid">
-    {{/* Call the template `yield` and pass the data `.` */}}
-    {{/* depends which yield (home or contact) gets call from parseFiles that yield will get pass in here and render it */}}
       {{template "yield" .}} 
     </div>
 

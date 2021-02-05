@@ -7,7 +7,8 @@ func NewView(layout string, files ...string) *View {
 
 	files = append(files,
 		"views/layouts/footer.gohtml",
-		"views/layouts/bootstrap.gohtml", //adding our layout bootstrap template to render
+		"views/layouts/navbar.gohtml", // add navbar template
+		"views/layouts/bootstrap.gohtml",
 	)
 
 	// which ever `yield` pass in is the one to get use
