@@ -1,9 +1,14 @@
-<h1>Get in touch! </h1>
-<p>
-    <a href="mailto:support@usegolang.com">
-    support@usegolang.com
-    </a>.
-</p>
+{{/* Defining `yield` template */}}
+{{define "yield"}}
+    <h1>Get in touch! </h1>
+    <p>
+        <a href="mailto:support@usegolang.com">
+        support@usegolang.com
+        </a>.
+    </p>
 
-{{/* using our footer template */}}
-{{template "footer"}}
+    {{template "footer"}}
+
+{{end}}
+
+{{/* If this yield get call from parseFiles() this whole block will get inserted in bootstrap template */}}

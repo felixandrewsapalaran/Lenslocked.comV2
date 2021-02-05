@@ -1,5 +1,10 @@
-<h1>Welcome to my awesome site</h1>
+{{/* Defining the `yield` template */}}
+{{define "yield"}}
+    <h1>Welcome to my awesome site</h1>
 
-{{/* using our footer template */}}
-{{template "footer"}}
+
+    {{template "footer"}}
+{{end}}
+
+{{/* If this yield get call from parseFiles() this whole block will get inserted in bootstrap template */}}
 
