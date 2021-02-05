@@ -2,6 +2,7 @@ package views
 
 import (
 	"html/template"
+	"net/http"
 	"path/filepath"
 )
 
@@ -14,8 +15,6 @@ var (
 
 // NewView parse all the files necessary and return them to us
 func NewView(layout string, files ...string) *View {
-	// calling this function layoutFiles() which gives us a slice
-	// but append takes a variadic parameter (...) as a last argument
 	files = append(files, layoutFiles()...)
 
 	t, err := template.ParseFiles(files...)
@@ -35,13 +34,14 @@ type View struct {
 	Layout   string
 }
 
+// Render is used to render the view with predefined layout.
+func (v *View) Render(w http.ResponseWriter, data interface{}) error { // data the is the data we want to pass in when we execute our template
+	return v.Template.ExecuteTemplate(w, v.Layout, data)
+}
+
 // layoutFiles returns a slice of strings representing
 // the layout files used in our application.
 func layoutFiles() []string {
-	// REMOVED
-	// files, err := filepath.Glob("views/layouts/*.gohtml")
-
-	// REPLACED
 	files, err := filepath.Glob(LayoutDir + "*" + TemplateExt)
 	if err != nil {
 		panic(err)
