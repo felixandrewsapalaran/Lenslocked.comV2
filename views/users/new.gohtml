@@ -17,7 +17,8 @@
 
 
 {{define "signupForm"}}
-    <form>
+    {{/*  we need to tell it what path to submit the data to and what method which is POST*/}}
+    <form action="/signup" method="POST">
     <div class="form-group">
         <label for="email">Email address</label>
         <input type="email" name="email" class="form-control" id="email" placeholder="Email">
@@ -29,3 +30,6 @@
     <button type="submit" class="btn btn-primary">Sign up</button>
     </form>
 {{end}}
+
+
+
